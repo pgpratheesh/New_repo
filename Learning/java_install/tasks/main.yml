@@ -1,0 +1,6 @@
+---
+- name: Install Java 7
+  become: yes
+  action: apt pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    -  default-jre
