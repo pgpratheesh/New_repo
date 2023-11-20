@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# File containing a list of servers (one per line)
+servers_file="servers.txt"
+
+# Command to execute
+command_to_execute="your_command_here"
+
+# Password for SSH access (replace with your actual password)
+password="your_password_here"
+
+# Check if the servers file exists
+if [ ! -f "$servers_file" ]; then
+    echo "Error: Servers file not found."
+    exit 1
+fi
+
+# Loop through the servers in the file and execute the command
+while IFS= read -r server; do
+    echo "Executing command on $server"
+    sshpass -p "$password" ssh user@$server "$command_to_execute"
+    echo "Command executed on $server"
+done < "$servers_file"
